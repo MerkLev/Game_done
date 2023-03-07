@@ -1,15 +1,22 @@
 import java.util.*;
-public class Ability {
+import Point.*;
+public class Ability extends Distance{
     private int Attack;
     private int Armor;
     private int Arrow;
     private int Health;
+    private int MaxHealth;
     private int Speed;
     private int Damage;
     private int Delivery;
     private int Wizzard;
     public String Name;
     public String Info;
+    public Point Pos;
+    public String Status;
+    public String Team;
+
+    void StepBow(Ability Bow,List<Ability> Team,List<Ability> Team2){}
 
     public int getDamage() {
         return Damage;
@@ -75,4 +82,22 @@ public class Ability {
         Wizzard = wizzard;
     }
     public String getInfo(){return(Info);}
+    public Point getPoint(){return(Pos);}
+
+    public int getMaxHealth() {
+        return MaxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        MaxHealth = maxHealth;
+    }
+    public void StepPeasant(Ability Pes, List<Ability> Team){}
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 }
