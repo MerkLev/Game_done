@@ -1,6 +1,6 @@
 import java.util.*;
 import Point.*;
-public class Ability extends Distance{
+public abstract class Ability extends Distance{
     private int Attack;
     private int Armor;
     private int Arrow;
@@ -9,14 +9,20 @@ public class Ability extends Distance{
     private int Speed;
     private int Damage;
     private int Delivery;
+    public String Stat;
     private int Wizzard;
     public String Name;
     public String Info;
     public Point Pos;
     public String Status;
     public String Team;
+    public String aTeam;
 
-    void StepBow(Ability Bow,List<Ability> Team,List<Ability> Team2){}
+    public String getaTeam() {
+        return aTeam;
+    }
+
+    void StepBow(Ability Bow, List<Ability> Team, List<Ability> Team2){}
 
     public int getDamage() {
         return Damage;
@@ -91,7 +97,6 @@ public class Ability extends Distance{
     public void setMaxHealth(int maxHealth) {
         MaxHealth = maxHealth;
     }
-    public void StepPeasant(Ability Pes, List<Ability> Team){}
 
     public String getName() {
         return Name;
@@ -99,5 +104,39 @@ public class Ability extends Distance{
 
     public void setName(String name) {
         Name = name;
+    }
+
+    //    Реализовать метод step() лучников.
+//    3.1 Если жизнь равна нулю или стрел нет, завершить обработку.
+//    3.2 Поиск среди противников наиболее приближённого.
+//    3.3 Нанести среднее повреждение найденному противнику.
+//    3.4 Найти среди своих крестьянина.
+//    3.5 Если найден завершить метод иначе уменьшить запас стрел на одну.
+     void Step( List<Ability> Team, List<Ability> Team2,List<Ability> allteam){};
+     void Step(Ability Pes, List<Ability> Team){};
+
+    public String getStat() {
+        return Stat;
+    }
+
+    public String getTeam() {
+        return Team;
+    }
+
+    public void setPos(Point pos) {
+        Pos = pos;
+    }
+
+    public void setStat(String stat) {
+        Stat = stat;
+    }
+    @Override
+    public String toString() {
+        return getName() +
+                " H:" + Math.round(getHealth()) +
+                " D:" + getArmor() +
+                " A:" + getAttack() +
+                " Dmg:" + getDamage() +
+                " " + getStat();
     }
 }

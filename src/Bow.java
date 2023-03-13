@@ -3,7 +3,7 @@ import java.util.*;
 class Bow extends Ability {
     final Random random = new Random();
 
-    Bow(String Imya, String Teams) {
+    Bow(String Imya, String Teams, String aTeams) {
         setMaxHealth(10);
         setHealth(10);
         setArmor(3);
@@ -13,20 +13,25 @@ class Bow extends Ability {
         setDelivery(0);
         setSpeed(4);
         Team = Teams;
+        Stat = "Alive";
         setWizzard(0);
-        if (Team.equals("Red")) {
-            Pos = new Point(0, 7);
-        } else Pos = new Point(9, 7);
+        if (Team.equals("Blue")) {
+            Pos = new Point(1, 1);
+        } else Pos = new Point(10, 7);
         Name = Imya;
         Info = "Лучник";
+        aTeam = aTeams;
     }
 
     public void doDamage(Ability Bow, Ability Enemy) {
-        System.out.println(Enemy.getName());
-        System.out.println(Enemy.getPoint());
-        System.out.println(getDistance(Bow.getPoint(),Enemy.getPoint()));
-        Enemy.setHealth(Enemy.getHealth() - Bow.getDamage());
-        System.out.println(Enemy.getHealth());
+        int dam = Bow.getDamage();
+        Enemy.setHealth(Enemy.getHealth() - dam);
+        if(Enemy.getHealth()>0){
+            System.out.printf("\n%s наносит %s %d урона", Bow.getName(),Enemy.getName(),dam);
+        } else if ((Enemy.getHealth())<=0) {
+            System.out.printf("\n%s убивает %s", Bow.getName(), Enemy.getName());
+            Enemy.setStat("Dead");
+        }
     }
 
 
@@ -37,18 +42,23 @@ class Bow extends Ability {
 //    3.4 Найти среди своих крестьянина.
 //    3.5 Если найден завершить метод иначе уменьшить запас стрел на одну.
     @Override
-    void StepBow(Ability Bow, List<Ability> Team, List<Ability> Team2) {
-        if (Bow.getHealth() > 0 && Bow.getArrow() > 0) {
-            doDamage(Bow, Team2.get(getNearestEnemy(Bow.getPoint(), Team2)));
-        }
+    void Step(List<Ability> Team, List<Ability> Team2,List<Ability> allteam) {
         for (Ability A : Team) {
-            if (A.getInfo().equals("Фермер") && A.getHealth() > 0) {
-                System.out.println("Peasant: Nice shot sir!");
-                return;
-            } else if (A.getInfo().equals("Фермер") && A.getHealth() == 0) {
-                System.out.println("Bowman: Poor Yorick");
-                Bow.setArrow(Bow.getArrow() - 1);
-            } ;
+            if (A.getInfo().equals("Лучник") && A.getHealth() > 0 && A.getArrow() > 0) {
+                Ability Bo = A;
+                doDamage(Bo, Team2.get(getNearestEnemy(Bo.getPoint(), Team2)));
+                for (Ability B : Team) {
+                    if (B.getInfo().equals("Фермер") && B.getHealth() > 0) {
+                        return;
+                    } else if (B.getInfo().equals("Фермер") && B.getHealth() == 0) {
+                        System.out.println("Bowman: Poor Yorick");
+                        Bo.setArrow(Bo.getArrow() - 1);
+                    }
+                    ;
+                }
+            }
         }
     }
 }
+
+
