@@ -1,5 +1,6 @@
 import Point.Point;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -51,70 +52,102 @@ public class Monk extends Ability{
                     Buff = A.getPoint();
                     int X = Buff.getX();
                     int Y = Buff.getY();
+                    boolean posss = false;
                     System.out.println("\nПередвижение. Введите следующий символ:");
-                    System.out.println("\nW- Вверх, A- Влево,S - Вниз, D-Вправо. Пример: DDSS");
-
+                    System.out.println("\nW- Вверх, A- Влево,S - Вниз, D-Вправо.");
                     String move = Sc.nextLine();
                     switch (move) {
                         case ("W"):
+                            Abuff =new Point(X, Y-1);
                             if((Y-1)<1){
                                 System.out.println("Бежать некуда!");
-                                break;
-                            }else
-                                Abuff =new Point(X, Y-1);
-                            for(Ability F : allteam){
-                                if (F.getPoint()==Abuff && F.getTeam().equals(C.getTeam()) && !F.getName().equals(C.getName())) {
-                                    System.out.printf("Привет, %s!",F.getName());
-                                } else if (F.getPoint()==Abuff && !F.getTeam().equals(C.getTeam())){
-                                    doDamage(C,F);
+                                break;}
+                            for(Ability F : allteam) {
+                                if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY()) {
+                                    posss = true;
                                 }
-                                else C.setPos(Abuff);
+                            }
+                            for(Ability F: allteam){
+                                if (!posss) {
+                                    C.setPos(Abuff);
+                                } else if (posss) {
+                                    if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY() && F.getTeam().equals(C.getTeam()) && !F.getName().equals(C.getName())) {
+                                        System.out.printf("Привет, %s!", F.getName());
+                                    } else if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY() && !F.getTeam().equals(C.getTeam())) {
+                                        doDamage(C, F);
+                                    }
+                                }
                             }
                             break;
 
                         case ("A"):
+                            Abuff =new Point(X-1, Y);
                             if((X-1)<1){
                                 System.out.println("Бежать некуда!");
                                 break;
-                            }else
-                                Abuff =new Point(X-1, Y);
-                            for(Ability F : allteam){
-                                if (F.getPoint()==Abuff && F.getTeam().equals(C.getTeam()) && !F.getName().equals(C.getName())) {
-                                    System.out.printf("Привет, %s!",F.getName());
-                                } else if (F.getPoint()==Abuff && !F.getTeam().equals(C.getTeam())){
-                                    doDamage(C,F);
+                            }
+                            for(Ability F : allteam) {
+                                if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY()) {
+                                    posss = true;
                                 }
-                                else C.setPos(Abuff);
+                            }
+                            for(Ability F: allteam){
+                                if (!posss) {
+                                    C.setPos(Abuff);
+                                } else if (posss) {
+                                    if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY() && F.getTeam().equals(C.getTeam()) && !F.getName().equals(C.getName())) {
+                                        System.out.printf("Привет, %s!", F.getName());
+                                    } else if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY() && !F.getTeam().equals(C.getTeam())) {
+                                        doDamage(C, F);
+                                    }
+                                }
                             }
                             break;
                         case ("S"):
+                            Abuff =new Point(X, Y+1);
                             if((Y+1)>10){
                                 System.out.println("Бежать некуда!");
                                 break;
-                            }else
-                                Abuff =new Point(X, Y+1);
-                            for(Ability F : allteam){
-                                if (F.getPoint()==Abuff && F.getTeam().equals(C.getTeam()) && !F.getName().equals(C.getName())) {
-                                    System.out.printf("Привет, %s!",F.getName());
-                                } else if (F.getPoint()==Abuff && !F.getTeam().equals(C.getTeam())){
-                                    doDamage(C,F);
+                            }
+                            for(Ability F : allteam) {
+                                if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY()) {
+                                    posss = true;
                                 }
-                                else C.setPos(Abuff);
+                            }
+                            for(Ability F: allteam){
+                                if (!posss) {
+                                    C.setPos(Abuff);
+                                } else if (posss) {
+                                    if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY() && F.getTeam().equals(C.getTeam()) && !F.getName().equals(C.getName())) {
+                                        System.out.printf("Привет, %s!", F.getName());
+                                    } else if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY() && !F.getTeam().equals(C.getTeam())) {
+                                        doDamage(C, F);
+                                    }
+                                }
                             }
                             break;
+
                         case ("D"):
+                            Abuff =new Point(X+1, Y);
                             if((X+1)>10){
                                 System.out.println("Бежать некуда!");
                                 break;
-                            }else
-                                Abuff =new Point(X+1, Y);
-                            for(Ability F : allteam){
-                                if (F.getPoint()==Abuff && F.getTeam().equals(C.getTeam()) && !F.getName().equals(C.getName())) {
-                                    System.out.printf("Привет, %s!",F.getName());
-                                } else if (F.getPoint()==Abuff && !F.getTeam().equals(C.getTeam())){
-                                    doDamage(C,F);
+                            }
+                            for(Ability F : allteam) {
+                                if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY()) {
+                                    posss = true;
                                 }
-                                else C.setPos(Abuff);
+                            }
+                            for(Ability F: allteam){
+                                if (!posss) {
+                                    C.setPos(Abuff);
+                                } else if (posss) {
+                                    if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY() && F.getTeam().equals(C.getTeam()) && !F.getName().equals(C.getName())) {
+                                        System.out.printf("Привет, %s!", F.getName());
+                                    } else if (F.getPoint().getX() == Abuff.getX() && F.getPoint().getY() == Abuff.getY() && !F.getTeam().equals(C.getTeam())) {
+                                        doDamage(C, F);
+                                    }
+                                }
                             }
                             break;
                     }
@@ -122,5 +155,4 @@ public class Monk extends Ability{
             }
         }
     }
-
 }

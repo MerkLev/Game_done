@@ -21,6 +21,7 @@ public class Main {
     static List <Ability> holyTeam = Arrays.asList(Sn, Bo, Mo, Ro, Wi, Pi, Sp);
     static List <Ability> darkTeam = Arrays.asList(Sn1, Bo1, Mo1, Ro1, Wi1, Pi1, Sp1);
     static List <Ability> allTeam = new ArrayList<>();
+    static List <Point> Positions = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner Sc = new Scanner(System.in);
@@ -32,6 +33,9 @@ public class Main {
         while (Game){
             View.view();
             Sc.nextLine();
+            for(Ability A: allTeam){
+                Positions.add(A.getPoint());
+            }
             boolean WinBlue = false;
             boolean WinGreen = false;
             int deadCount = 0;
